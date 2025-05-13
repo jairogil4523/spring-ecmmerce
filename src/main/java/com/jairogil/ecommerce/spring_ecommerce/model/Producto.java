@@ -1,25 +1,44 @@
 package com.jairogil.ecommerce.spring_ecommerce.model;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name="productos")
 public class Producto {
 
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
     private String nombre;
+    
     private String descripcion;
+    
     private String imagen;
+    
     private double precio;
+    
     private Integer cantidad;
     
+    @ManyToOne
+    private Usuario usuario;
+
     public Producto() {
     }
 
-    public Producto(Integer id, String nombre, String descripcion, String imagen, double precio, Integer cantidad) {
+    public Producto(Integer id, String nombre, String descripcion, String imagen, double precio, Integer cantidad, Usuario usuario) {
         this.id = id;
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.imagen = imagen;
         this.precio = precio;
         this.cantidad = cantidad;
+        this.usuario = usuario;
     }
 
     public Integer getId() {
@@ -70,11 +89,17 @@ public class Producto {
         this.cantidad = cantidad;
     }
 
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+
     @Override
     public String toString() {
         return "Producto [id=" + id + ", nombre=" + nombre + ", descripcion=" + descripcion + ", imagen=" + imagen
                 + ", precio=" + precio + ", cantidad=" + cantidad + ", toString()=" + super.toString() + "]";
     }
-
-    
 }
